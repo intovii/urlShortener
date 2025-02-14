@@ -3,7 +3,6 @@ FROM postgres:17
 
 # Копируем скрипт инициализации в контейнер
 COPY init.sql /docker-entrypoint-initdb.d/
-COPY insert_test_data.sql /docker-entrypoint-initdb.d/
 
 # Устанавливаем переменную окружения для инициализации базы данных
 ENV POSTGRES_DB=postgres

@@ -31,7 +31,7 @@ func NewRepository(ctx context.Context, cfg *config.ConfigModel, log *zap.Logger
 		log.Info("In-memory storage")
 		repo, _ = inMemory.NewInMemoRepository(ctx, log)
 	default:
-		log.Fatal("Storage type invalid")
+		log.Error("Storage type invalid")
 		return nil, errors.New("invalid storage type")
 	}
 	

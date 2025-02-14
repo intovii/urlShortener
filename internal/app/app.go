@@ -2,7 +2,7 @@ package app
 
 import (
 	"URLShortener/config"
-	"log/slog"
+	"log"
 
 	"URLShortener/internal/delivery/http/server"
 	"URLShortener/internal/repository"
@@ -27,13 +27,13 @@ func New() *App {
 	
 	cfg, err := config.NewConfig()
 	if err != nil {
-		slog.Error("error with config")
+		log.Fatal("error with config")
 		return nil
 	}
 	
 	log, err := zap.NewProduction()
 	if err != nil {
-		slog.Error("error with zap logger")
+		log.Fatal("error with zap logger")
 		return nil
 	}
 	

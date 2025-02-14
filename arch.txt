@@ -1,5 +1,15 @@
 crypto_parser
 │
+├── api
+│   └── proto
+│       ├── google
+|       |   └── api
+|       |       ├── annotations.proto 
+|       |       └── http.proto
+|       |       
+|       └── urlShortener
+|           └── app.proto
+|
 ├── cmd
 │   └── main.go
 │
@@ -7,6 +17,15 @@ crypto_parser
 │   ├── config.go
 │   ├── config.yaml
 |   └── model.go
+|
+├── db_container
+│   ├── delete.sql
+│   ├── Dockerfile
+│   ├── init.sql
+|   └── retry.sh
+|
+├── domain
+│   └── common.go
 │
 ├── internal
 │   ├── app
@@ -19,9 +38,6 @@ crypto_parser
 |   |           ├── module.go
 |   |           └── server.go
 │   │
-│   ├── entities
-│   │   └── entities.go
-│   │
 │   ├── repository
 │   │   ├── inMemo
 |   |   |   └── inMemo.go
@@ -32,10 +48,17 @@ crypto_parser
 │   │   └── repository.go
 │   │
 │   └── usecase
+|       ├── mocks
+|       |   └── mock.go
+|       |
 |       ├── module.go
+|       ├── usecase_test.go
 |       └── usecase.go
 │
-├── pkg
+├── pb
+│   ├── app_grpc.pb.go
+│   ├── app.pb.go
+|   └── app.pb.gw.go
 |
 │
 ├── api
@@ -52,8 +75,12 @@ crypto_parser
 │   └── init.sql
 |
 ├── .env
+├── .env.example
+├── .gitignore
 ├── arch.txt
 ├── docker-compose.yaml
 ├── Dockerfile
 ├── go.mod
-└── go.sum
+├── go.sum
+├── Makefile
+└── README.md

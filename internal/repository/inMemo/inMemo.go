@@ -23,13 +23,14 @@ type InMemoRepository struct {
 func NewInMemoRepository(ctx context.Context, log *zap.Logger) (*InMemoRepository, error) {
 	return &InMemoRepository{
 		log: log,
-		DB: make(map[string]*item),
+		DB: nil,
 		mu: &sync.RWMutex{},
 	}, nil
 }
 
 func (im *InMemoRepository) OnStart(_ context.Context) error {
 	im.log.Info("start in-memory")
+	im.DB = make(map[string]*item)
 	return nil
 }
 

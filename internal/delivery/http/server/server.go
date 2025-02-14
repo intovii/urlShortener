@@ -42,14 +42,16 @@ func (s *Server) OnStart(_ context.Context) error {
 		grpc.WithTransportCredentials(insecure.NewCredentials()),
 	)
 	if err != nil {
-		s.log.Fatal("Failed to dial server:", zap.Error(err))
+		s.log.Error("Failed to dial server:", zap.Error(err))
+		return err
 	}
 	defer conn.Close()
 	
 	gwmux := runtime.NewServeMux()
 	err = protos.RegisterGatewayHandler(context.Background(), gwmux, conn)
 	if err != nil {
-		s.log.Fatal("Failed to register gateway:", zap.Error(err))
+		s.log.Error("Failed to register gateway:", zap.Error(err))
+		return err
 	}
 	
 	s.log.Info(fmt.Sprintf("Serving gRPC-Gateway on port %s", s.cfg.Server.HTTPPort))
@@ -61,9 +63,11 @@ func (s *Server) OnStart(_ context.Context) error {
 	
 	if err = gwServer.ListenAndServe(); err != nil {
 		if err == http.ErrServerClosed {
-			s.log.Fatal("Server closed:", zap.Error(err))
-		}
-		s.log.Fatal("Failed to listen and serve:", zap.Error(err))
+			s.log.Error("Server closed:", zap.Error(err))
+			return err
+		}	
+		s.log.Error("Failed to listen and serve:", zap.Error(err))
+		return err
 	}
 	return nil
 }
