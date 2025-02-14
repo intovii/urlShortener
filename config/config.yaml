@@ -1,0 +1,14 @@
+service_name: "urlShortener"
+
+Postgres:
+  port: "5432"
+  host: "db_urls"
+  user: "postgres"
+  password: "password"
+  DBName: "urls"
+  sslMode: "allow"
+
+Server: #http
+  host: "0.0.0.0"
+  gRPCport: "3000"
+  HTTPport: "8080"

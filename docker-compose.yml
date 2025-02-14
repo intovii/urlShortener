@@ -1,0 +1,51 @@
+
+services:
+  db_urls:
+    build: ./db_container
+    container_name: db_urls
+    environment:
+      POSTGRES_DB: postgres
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: password
+    ports:
+      - "6132:5432"
+    volumes:
+      - pg_data:/var/lib/postgresql/data
+      - ./db_container/init.sql:/docker-entrypoint-initdb.d/init.sql
+    restart: always
+    profiles:
+      - psql
+
+  url_shortener:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: url_shortener:latest
+    container_name: url_shortener
+    ports:
+      - "3000:3000"
+      - "8080:8080"
+    restart: always
+    depends_on:
+      - db_urls
+    env_file:
+      - .env
+    profiles:
+      - psql
+
+  in_memory:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: in_memory
+    ports:
+      - "3000:3000"
+      - "8080:8080"
+    restart: always
+    env_file:
+      - .env
+    profiles:
+      - in_memory
+
+volumes:
+  pg_data:

@@ -1,0 +1,59 @@
+crypto_parser
+│
+├── cmd
+│   └── main.go
+│
+├── config
+│   ├── config.go
+│   ├── config.yaml
+|   └── model.go
+│
+├── internal
+│   ├── app
+│   │   └── app.go
+│   │
+│   ├── delivery
+│   │   └── http
+|   |       |
+|   |       └── server
+|   |           ├── module.go
+|   |           └── server.go
+│   │
+│   ├── entities
+│   │   └── entities.go
+│   │
+│   ├── repository
+│   │   ├── inMemo
+|   |   |   └── inMemo.go
+|   |   |
+│   │   ├── postgres
+|   |   |   └── postgres.go
+|   |   |
+│   │   └── repository.go
+│   │
+│   └── usecase
+|       ├── module.go
+|       └── usecase.go
+│
+├── pkg
+|
+│
+├── api
+│   ├── google
+|   |   └── api
+|   |       ├── annotations.go
+|   |       └── http.proto
+|   └── proto
+|       └── urlShortener
+|           └── app.proto
+|
+├── db_container
+│   ├── Dockerfile
+│   └── init.sql
+|
+├── .env
+├── arch.txt
+├── docker-compose.yaml
+├── Dockerfile
+├── go.mod
+└── go.sum
